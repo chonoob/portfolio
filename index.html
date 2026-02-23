@@ -1,46 +1,220 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ko">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Portfolio</title>
-    <link rel="stylesheet" href="styles.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>군산새빛유치원 서류 원본형 온라인 작성</title>
+  <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
-    <header>
-        <h1>My Portfolio</h1>
-        <nav>
-            <ul>
-                <li><a href="#about">About</a></li>
-                <li><a href="#projects">Projects</a></li>
-                <li><a href="#contact">Contact</a></li>
-            </ul>
-        </nav>
-    </header>
+  <header class="topbar">
+    <h1>군산새빛유치원 학기초 서류 온라인 작성</h1>
+    <p>원본 양식 구조대로 작성/체크/서명하고, 관리자만 제출 내용을 확인합니다.</p>
+  </header>
 
-    <div class="container">
-        <section id="about">
-            <h2>소개</h2>
-            <p>안녕하세요, 저는 박창훈입니다. 현재 유치원 교사이자, 한국교원대학교에서 박사과정을 밟고 있습니다.</p>
-            <p>현) 군산가람유치원 교사<br>현) 한국교원대학교 유아교육과 박사과정<br>현) (주)아이스크림키즈 자문교사<br>현) 전북특별자치도교육청 감사지원단<br>현) 조달청 평가위원</p>
-        </section>
+  <main class="layout">
+    <section class="card">
+      <div class="tabs" role="tablist">
+        <button class="tab-btn active" data-tab="parent" type="button">학부모 작성</button>
+        <button class="tab-btn" data-tab="admin" type="button">관리자 확인</button>
+      </div>
 
-        <section id="projects">
-            <h2>Projects</h2>
-            <div class="project">
-                <h3>Project Title</h3>
-                <p>Project description goes here.</p>
+      <div id="parent" class="tab-content active">
+        <p class="notice">※ 사용 안내: 종이 양식의 각 항목을 동일한 순서로 구성했습니다. 기재란은 입력, 체크란은 체크박스, 서명란은 자필 서명을 사용하세요.</p>
+
+        <form id="consentForm">
+          <section class="doc">
+            <h2>공통 인적사항</h2>
+            <div class="grid three">
+              <label>유아 성명<input name="childName" required /></label>
+              <label>연령/반<input name="classAge" placeholder="예: 5세/새빛반" required /></label>
+              <label>생년월일<input name="childBirth" type="date" required /></label>
+              <label>보호자 성명<input name="guardianName" required /></label>
+              <label>관계<input name="guardianRelation" required /></label>
+              <label>연락처<input name="guardianPhone" required /></label>
+              <label class="full">주소(도로명)<input name="address" required /></label>
             </div>
-        </section>
+          </section>
 
-        <section id="contact">
-            <h2>Contact</h2>
-            <p>Email: <a href="mailto:rytk1004@jbedu.kr">rytk1004@jbedu.kr</a></p>
-        </section>
-    </div>
+          <section class="doc">
+            <h2>1. 입학원서</h2>
+            <div class="grid three">
+              <label>지원 구분<input name="applyType" placeholder="일반/우선/특수" /></label>
+              <label>방과후 과정 희망
+                <select name="afterSchoolWish"><option>희망</option><option>비희망</option></select>
+              </label>
+              <label>통학차량
+                <select name="busUse"><option>이용함</option><option>이용안함</option></select>
+              </label>
+            </div>
+            <label class="check"><input type="checkbox" name="admissionConsent" required /> 개인정보 수집 및 문자 수신 서비스 제공 동의 (원본 1번)</label>
+            <div class="sign-wrap">
+              <p>보호자 서명(서명 또는 인)</p>
+              <canvas class="signature-pad" data-name="sign_admission" width="700" height="170"></canvas>
+              <button type="button" class="secondary clear-sign">서명 지우기</button>
+            </div>
+          </section>
 
-    <footer>
-        <p>&copy; 2024 박창훈</p>
-    </footer>
+          <section class="doc">
+            <h2>2. 유아 지도를 위한 기초 자료 조사</h2>
+            <div class="grid two">
+              <label>편식 여부<input name="dietHabit" /></label>
+              <label>좋아하는 음식<input name="favoriteFood" /></label>
+              <label>싫어하는 음식<input name="dislikeFood" /></label>
+              <label>수면 습관<input name="sleepHabit" /></label>
+            </div>
+            <label>정서/기타 특성<textarea name="emotionTrait" rows="3"></textarea></label>
+            <label>담임교사에게 특별히 부탁할 말씀<textarea name="teacherNote" rows="3"></textarea></label>
+          </section>
+
+          <section class="doc">
+            <h2>3. 응급상황 안내 및 동의서 / 유아 건강조사</h2>
+            <div class="grid three">
+              <label>혈액형<input name="bloodType" /></label>
+              <label>응급연락처1<input name="emergencyPhone1" /></label>
+              <label>응급연락처2<input name="emergencyPhone2" /></label>
+              <label class="full">자주 이용 병의원/전화<input name="hospitalInfo" /></label>
+            </div>
+            <label>건강 질환/현재상태<textarea name="healthIssue" rows="2"></textarea></label>
+            <label class="check"><input type="checkbox" name="emergencyConsent" required /> 응급처치 절차 및 응급상황 조치에 동의합니다.</label>
+            <div class="sign-wrap">
+              <p>보호자 서명(서명 또는 인)</p>
+              <canvas class="signature-pad" data-name="sign_emergency" width="700" height="170"></canvas>
+              <button type="button" class="secondary clear-sign">서명 지우기</button>
+            </div>
+          </section>
+
+          <section class="doc">
+            <h2>3-1. 식품 알레르기 조사</h2>
+            <label class="check"><input type="checkbox" name="allergyHas" /> 식품 알레르기 있음</label>
+            <label class="check"><input type="checkbox" name="allergyNone" /> 식품 알레르기 없음</label>
+            <label>원인 식품/증상<textarea name="allergyInfo" rows="3"></textarea></label>
+            <label class="check"><input type="checkbox" name="allergyPrivacyConsent" /> 민감정보 수집·이용 동의</label>
+            <div class="sign-wrap">
+              <p>보호자 서명(서명 또는 인)</p>
+              <canvas class="signature-pad" data-name="sign_allergy" width="700" height="170"></canvas>
+              <button type="button" class="secondary clear-sign">서명 지우기</button>
+            </div>
+          </section>
+
+          <section class="doc">
+            <h2>4. 유아 건강검진정보 제공·이용 사전동의서</h2>
+            <label class="check"><input type="checkbox" name="healthInfoAgree" /> 건강검진정보 제공 동의</label>
+            <label class="check"><input type="checkbox" name="healthInfoDisagree" /> 건강검진정보 제공 미동의</label>
+            <label class="check"><input type="checkbox" name="jointUseAgree" /> 행정정보 공동이용 동의</label>
+            <label class="check"><input type="checkbox" name="jointUseDisagree" /> 행정정보 공동이용 미동의</label>
+            <div class="sign-wrap">
+              <p>법정대리인 서명(서명 또는 인)</p>
+              <canvas class="signature-pad" data-name="sign_healthinfo" width="700" height="170"></canvas>
+              <button type="button" class="secondary clear-sign">서명 지우기</button>
+            </div>
+          </section>
+
+          <section class="doc">
+            <h2>5. 현장체험활동 참여 동의서</h2>
+            <label class="check"><input type="checkbox" name="fieldTripAgree" /> 동의함</label>
+            <label class="check"><input type="checkbox" name="fieldTripDisagree" /> 동의하지 않음</label>
+            <label>비동의 사유/주의사항<textarea name="fieldTripReason" rows="2"></textarea></label>
+            <div class="sign-wrap">
+              <p>보호자 서명(서명 또는 인)</p>
+              <canvas class="signature-pad" data-name="sign_fieldtrip" width="700" height="170"></canvas>
+              <button type="button" class="secondary clear-sign">서명 지우기</button>
+            </div>
+          </section>
+
+          <section class="doc">
+            <h2>6. 개인정보 수집·이용 일괄 동의서</h2>
+            <div class="grid two check-grid">
+              <label class="check"><input type="checkbox" name="consent_admission" /> 입학원서 동의</label>
+              <label class="check"><input type="checkbox" name="consent_sms" /> SMS 문자 서비스 동의</label>
+              <label class="check"><input type="checkbox" name="consent_publicity" /> 교육활동 홍보 동의</label>
+              <label class="check"><input type="checkbox" name="consent_afterschool" /> 방과후과정 동의</label>
+              <label class="check"><input type="checkbox" name="consent_extend" /> 연장돌봄 확인서 동의</label>
+              <label class="check"><input type="checkbox" name="consent_meal" /> 우유/급식 신청 동의</label>
+            </div>
+            <div class="sign-wrap">
+              <p>보호자 성명/관계/연락처 확인 서명</p>
+              <canvas class="signature-pad" data-name="sign_privacy_bulk" width="700" height="170"></canvas>
+              <button type="button" class="secondary clear-sign">서명 지우기</button>
+            </div>
+          </section>
+
+          <section class="doc">
+            <h2>7. 방과후 과정 및 연장돌봄 신청서</h2>
+            <label class="check"><input type="checkbox" name="afterSchoolApply" /> 방과후 과정 신청</label>
+            <label class="check"><input type="checkbox" name="extendedCareApply" /> 연장돌봄 신청</label>
+            <label>희망 귀가 시간<input name="returnTime" placeholder="예: 17:40" /></label>
+            <div class="sign-wrap">
+              <p>보호자 서명(서명 또는 인)</p>
+              <canvas class="signature-pad" data-name="sign_afterschool" width="700" height="170"></canvas>
+              <button type="button" class="secondary clear-sign">서명 지우기</button>
+            </div>
+          </section>
+
+          <section class="doc">
+            <h2>8. 귀가 동의서</h2>
+            <div class="grid three">
+              <label>보호자1 성명<input name="pickupGuardian1" /></label>
+              <label>보호자1 연락처<input name="pickupPhone1" /></label>
+              <label>유아와의 관계<input name="pickupRelation1" /></label>
+              <label>보호자2 성명<input name="pickupGuardian2" /></label>
+              <label>보호자2 연락처<input name="pickupPhone2" /></label>
+              <label>유아와의 관계<input name="pickupRelation2" /></label>
+            </div>
+            <label class="check"><input type="checkbox" name="delegatePickup" /> 대리인 귀가 위임 있음(8-1, 8-2 해당)</label>
+            <div class="sign-wrap">
+              <p>보호자 서명(서명 또는 인)</p>
+              <canvas class="signature-pad" data-name="sign_pickup" width="700" height="170"></canvas>
+              <button type="button" class="secondary clear-sign">서명 지우기</button>
+            </div>
+          </section>
+
+          <section class="doc">
+            <h2>10. 무단결석 시 정보제공 및 가정방문 안내·동의서</h2>
+            <label class="check"><input type="checkbox" name="absenceInfoAgree" /> 개인정보 수집 동의</label>
+            <label class="check"><input type="checkbox" name="absenceThirdPartyAgree" /> 개인정보 제3자 제공 동의</label>
+            <label class="check"><input type="checkbox" name="homeVisitAgree" /> 가정 방문 동의</label>
+            <div class="sign-wrap">
+              <p>보호자 서명(서명 또는 인)</p>
+              <canvas class="signature-pad" data-name="sign_absence" width="700" height="170"></canvas>
+              <button type="button" class="secondary clear-sign">서명 지우기</button>
+            </div>
+          </section>
+
+          <section class="doc">
+            <h2>11. 행정정보 공동이용 사전동의서</h2>
+            <label class="check"><input type="checkbox" name="govDataAgree" /> 공동이용 행정정보 확인 동의</label>
+            <label>대상자 본인 유아성명<input name="govTargetName" /></label>
+            <div class="sign-wrap">
+              <p>법정대리인(보호자) 서명(서명 또는 인)</p>
+              <canvas class="signature-pad" data-name="sign_gov" width="700" height="170"></canvas>
+              <button type="button" class="secondary clear-sign">서명 지우기</button>
+            </div>
+          </section>
+
+          <button type="submit" class="primary submit-btn">모든 서류 제출하기</button>
+          <p id="submitMessage" class="submit-msg" aria-live="polite"></p>
+        </form>
+      </div>
+
+      <div id="admin" class="tab-content">
+        <h2>관리자 확인 화면</h2>
+        <p class="notice">관리자 PIN 입력 후 제출 내용을 확인하세요. (기본 PIN: <strong>admin1234</strong>)</p>
+        <div class="admin-login">
+          <input type="password" id="adminPin" placeholder="관리자 PIN" />
+          <button id="adminLoginBtn" type="button" class="primary">조회</button>
+        </div>
+        <div id="adminPanel" class="hidden">
+          <div class="actions">
+            <button id="exportBtn" type="button" class="secondary">JSON 내보내기</button>
+            <button id="clearAllBtn" type="button" class="danger">전체 삭제</button>
+          </div>
+          <div id="submissionList"></div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script src="app.js"></script>
 </body>
 </html>
