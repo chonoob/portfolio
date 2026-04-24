@@ -1,46 +1,107 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ko">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Portfolio</title>
+    <title>유치원 자료실 앱 프로토타입</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <header>
-        <h1>My Portfolio</h1>
-        <nav>
-            <ul>
-                <li><a href="#about">About</a></li>
-                <li><a href="#projects">Projects</a></li>
-                <li><a href="#contact">Contact</a></li>
-            </ul>
-        </nav>
+    <header class="hero">
+        <div>
+            <p class="eyebrow">우리 유치원 전용</p>
+            <h1>자료실 앱</h1>
+            <p class="subtitle">2층·3층·교실 사이 자료실까지, 어디에 무엇이 있는지 한눈에 찾는 온라인 자료실</p>
+        </div>
+        <div class="hero-badge">웹 · 앱(반응형) 지원</div>
     </header>
 
-    <div class="container">
-        <section id="about">
-            <h2>소개</h2>
-            <p>안녕하세요, 저는 박창훈입니다. 현재 유치원 교사이자, 한국교원대학교에서 박사과정을 밟고 있습니다.</p>
-            <p>현) 군산가람유치원 교사<br>현) 한국교원대학교 유아교육과 박사과정<br>현) (주)아이스크림키즈 자문교사<br>현) 전북특별자치도교육청 감사지원단<br>현) 조달청 평가위원</p>
+    <main>
+        <section class="card">
+            <h2>핵심 기능</h2>
+            <ul class="feature-list">
+                <li>기관 생성 후 자료실 개수/이름 설정</li>
+                <li>자료실별 수납장(가로 × 세로 칸) 배치</li>
+                <li>칸마다 실제 사진 + 자료 설명 저장</li>
+                <li>누구나 조회·수정 가능 (로그인 없음)</li>
+                <li>변경 이력 메모로 최신 상태 유지</li>
+            </ul>
         </section>
 
-        <section id="projects">
-            <h2>Projects</h2>
-            <div class="project">
-                <h3>Project Title</h3>
-                <p>Project description goes here.</p>
-            </div>
+        <section class="grid">
+            <article class="card">
+                <h2>1) 기관/자료실 설정</h2>
+                <form id="institutionForm" class="stack-form">
+                    <label>
+                        기관 이름
+                        <input id="institutionName" type="text" placeholder="예: 군산가람유치원" required>
+                    </label>
+                    <label>
+                        자료실 이름 (쉼표로 구분)
+                        <input id="rooms" type="text" placeholder="예: 2층 자료실, 3층 자료실, 해솔반 옆 자료실" required>
+                    </label>
+                    <button type="submit">기관 저장</button>
+                </form>
+                <p id="institutionSummary" class="muted">아직 저장된 기관이 없습니다.</p>
+            </article>
+
+            <article class="card">
+                <h2>2) 수납장 만들기</h2>
+                <form id="cabinetForm" class="stack-form">
+                    <label>
+                        자료실 선택
+                        <select id="roomSelect"></select>
+                    </label>
+                    <label>
+                        수납장 이름
+                        <input id="cabinetName" type="text" placeholder="예: 미술재료장 A" required>
+                    </label>
+                    <div class="inline-fields">
+                        <label>가로 칸
+                            <input id="cols" type="number" min="1" max="10" value="4" required>
+                        </label>
+                        <label>세로 칸
+                            <input id="rows" type="number" min="1" max="10" value="3" required>
+                        </label>
+                    </div>
+                    <button type="submit">수납장 생성</button>
+                </form>
+            </article>
         </section>
 
-        <section id="contact">
-            <h2>Contact</h2>
-            <p>Email: <a href="mailto:rytk1004@jbedu.kr">rytk1004@jbedu.kr</a></p>
+        <section class="card">
+            <h2>3) 수납장 칸 등록/조회</h2>
+            <p class="muted">칸을 눌러 자료 이름, 메모, 사진을 등록하거나 수정하세요.</p>
+            <div id="cabinetArea" class="cabinet-area"></div>
         </section>
-    </div>
+
+        <dialog id="slotDialog">
+            <form id="slotForm" method="dialog" class="stack-form">
+                <h3 id="dialogTitle">칸 정보</h3>
+                <label>
+                    자료 이름
+                    <input id="itemName" type="text" required>
+                </label>
+                <label>
+                    메모 / 변경사항
+                    <textarea id="itemNote" rows="3" placeholder="예: 색종이 2묶음 추가"></textarea>
+                </label>
+                <label>
+                    칸 사진
+                    <input id="itemPhoto" type="file" accept="image/*">
+                </label>
+                <menu>
+                    <button value="cancel" class="ghost">취소</button>
+                    <button id="saveSlot" value="default">저장</button>
+                </menu>
+            </form>
+        </dialog>
+    </main>
 
     <footer>
-        <p>&copy; 2024 박창훈</p>
+        <p>Prototype · localStorage 기반 데모 (기기별 공유를 위해서는 추후 서버 연동 필요)</p>
     </footer>
+
+    <script src="script.js"></script>
 </body>
 </html>
